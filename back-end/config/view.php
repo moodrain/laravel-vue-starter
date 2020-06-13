@@ -2,6 +2,9 @@
 
 return [
 
+    'perPage' => 10,
+    'maxPerPage' => 100,
+
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -32,9 +35,5 @@ return [
         'VIEW_COMPILED_PATH',
         realpath(storage_path('framework/views'))
     ),
-
-    'perPage' => 10,
-
-    'maxPerPage' => 100,
 
 ];

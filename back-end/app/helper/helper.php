@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 
 function rs(...$params) {
     header('Content-Type: application/json');
@@ -14,6 +15,8 @@ function rs(...$params) {
             $msg = $param;
         } else if(is_array($param) || is_object($param)) {
             $data = $param;
+        } else if(is_null($param)) {
+            $data = null;
         }
     }
     if($isLaravelPaginator) {
@@ -30,4 +33,17 @@ function rs(...$params) {
         'msg' => $msg,
         'data' => $data,
     ]);
+}
+
+function validate_arr_str(array $array, string $glue = ',') {
+    return implode($glue, array_values($array));
+}
+
+function ext($file) {
+    $info = pathinfo($file);
+    return $info['extension'] ?? null;
+}
+
+function singleUser() {
+    return config('app.single_user') ? User::query()->find(config('app.single_user')) : false;
 }

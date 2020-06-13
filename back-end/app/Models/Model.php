@@ -10,7 +10,13 @@ class Model extends LaravelModel
 {
     use SoftDeletes;
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     protected $hidden = ['deleted_at'];
+    protected $guarded = ['id'];
 
     public $searchRule = ['id' => '='];
     public $sortRule = ['id', 'createdAt', 'updatedAt'];
@@ -38,9 +44,13 @@ class Model extends LaravelModel
         $relations = parent::relationsToArray();
         $new = [];
         foreach($relations as $relation => $attribute) {
-            $new[$relation] = [];
-            foreach($attribute as $key => $value) {
-                $new[$relation][Str::camel($key)] = $value;
+            if(is_array($attribute)) {
+                $new[$relation] = [];
+                foreach($attribute as $key => $value) {
+                    $new[$relation][Str::camel($key)] = $value;
+                }
+            } else {
+                $new[$relation] = $attribute;
             }
         }
         return $new;
@@ -49,12 +59,5 @@ class Model extends LaravelModel
     public function newEloquentBuilder($query) {
         return new Builder($query);
     }
-
-//    public function registerGlobalScopes($builder) {
-//        foreach ($this->getGlobalScopes() as $identifier => $scope) {
-//            $builder->withGlobalScope($identifier, $scope);
-//        }
-//        return $builder;
-//    }
 
 }

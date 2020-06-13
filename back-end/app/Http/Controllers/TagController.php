@@ -47,6 +47,6 @@ class TagController extends Controller
     }
 
     public function __construct(TagRequest $request) {
-        parent::__construct();
+        parent::__construct($request);
     }
 }

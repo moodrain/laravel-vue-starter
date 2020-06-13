@@ -1,31 +1,31 @@
-localhost:80 {
-    proxy /api localhost:8000 {
+localhost:8080 {
+    proxy /api localhost:8081 {
         header_upstream Host {host}
     }
-    proxy /login localhost:8000 {
+    proxy /login localhost:8081 {
         header_upstream Host {host}
     }
-    proxy /logout localhost:8000 {
+    proxy /logout localhost:8081 {
         header_upstream Host {host}
     }
-    proxy /register localhost:8000 {
+    proxy /register localhost:8081 {
         header_upstream Host {host}
     }
-    proxy /password/reset localhost:8000 {
+    proxy /password/reset localhost:8081 {
         header_upstream Host {host}
     }
-    proxy /password/email localhost:8000 {
+    proxy /password/email localhost:8081 {
         header_upstream Host {host}
     }
-    proxy /laravel localhost:8000 {
+    proxy /laravel localhost:8081 {
         header_upstream Host {host}
     }
-    proxy / localhost:8080 {
+    proxy / localhost:8082 {
         header_upstream Host {host}
     }
 }
 
-localhost:8000 {
+localhost:8081 {
     root back-end/public
     fastcgi / 127.0.0.1:9000 php
     rewrite {
