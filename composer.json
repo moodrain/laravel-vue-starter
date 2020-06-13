@@ -1,0 +1,6 @@
+{
+    "name": "moodrain/laravel-vue-starter",
+    "type": "library",
+    "description": "a simple starter with laravel and vue",
+    "license": "MIT"
+}
